@@ -1,1 +1,4 @@
-
+.selectInput {
+  border: 1.2px solid darkgray;
+  border-radius: 8px;
+}
