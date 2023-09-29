@@ -7,7 +7,7 @@ import {
   ModalBody,
   ModalCloseButton,
 } from '@chakra-ui/react'
-import { Box, Button, Image } from '@chakra-ui/react';
+import { Box, Image } from '@chakra-ui/react';
 
 const ExpandedImage = (props) => {
   return ( 
@@ -17,8 +17,8 @@ const ExpandedImage = (props) => {
         <ModalContent>
           <ModalHeader textAlign="center">{props.selectedImage.breed}</ModalHeader>
           <ModalCloseButton />
-          <ModalBody>
-            <Image borderRadius="8px" boxSize="md" src={props.selectedImage.image} alt="No image found, sorry!" />
+          <ModalBody display="flex" justifyContent="center" alignItems="center">
+            <Image borderRadius="8px" src={props.selectedImage.image} alt="No image found, sorry!" />
           </ModalBody>
           <ModalFooter />
         </ModalContent>

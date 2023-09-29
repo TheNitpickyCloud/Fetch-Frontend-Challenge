@@ -11,7 +11,7 @@ const Gallery = (props) => {
   const [selectedImage, setSelectedImage] = useState({})
 
   useEffect(() => {
-    const gridData = []
+    const allData = []
     const fetches = []
 
     for(const dog of selectedList){
@@ -26,15 +26,32 @@ const Gallery = (props) => {
   
       fetches.push(
         fetch(queryString).then(res => res.json()).then(result => {
-          result.message.slice(0, 10).map((dogImage) => {
-            gridData.push({image: dogImage, breed: dog.value})
+          result.message.slice(0, 15).map((dogImage) => {
+            allData.push({image: dogImage, breed: dog.value})
           })
         })
       )
     }
 
     Promise.all(fetches).then(() => {
-      setDogImages(gridData)
+      const filteredFetches = []
+      const filteredData = []
+
+      allData.map((data) => {
+        filteredFetches.push(
+          fetch(data.image).then((res) => {
+            if(res.ok){
+              filteredData.push(data)
+            }
+          }).catch((err) => {
+            console.log(err)
+          })
+        )
+      })
+
+      Promise.all(filteredFetches).then(() => {
+        setDogImages(filteredData)
+      })
     })
   }, [selectedList])
 
@@ -58,7 +75,7 @@ const Gallery = (props) => {
             {
               dogImages.map((dog, index) => (
                 <GridItem key={index} w='160px' h='160px' >
-                  <Image onClick={() => handleImageClick(dog)} borderRadius="8px" boxSize='160px' src={dog.image} alt="No image found, sorry!" />
+                  <Image onClick={() => handleImageClick(dog)} _hover={{ cursor: "pointer" }} borderRadius="8px" boxSize='160px' src={dog.image} alt="No image found, sorry!" />
                 </GridItem>
               ))
             }
