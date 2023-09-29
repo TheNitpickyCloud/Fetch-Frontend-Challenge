@@ -16,7 +16,6 @@
     "@heroicons/react": "^2.0.18",
     "chakra-react-select": "^4.7.2",
     "framer-motion": "^10.16.4",
-    "i": "^0.3.7",
     "jotai": "^2.4.3",
     "next": "latest",
     "npm": "^10.1.0",
